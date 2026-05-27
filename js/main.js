@@ -12,7 +12,7 @@ async function loadConfig() {
     if (siteConfig.bio_en) I18N.en.bio = siteConfig.bio_en;
     if (siteConfig.avatar) document.querySelector('.avatar').src = siteConfig.avatar;
     if (siteConfig.social) {
-      var icons = document.querySelectorAll('.icon-btn');
+      var icons = document.querySelectorAll('.social-icon');
       siteConfig.social.forEach(function(s, i) { if (icons[i]) icons[i].href = s.url; });
     }
   } catch(e) { console.log('No config.json found, using defaults.'); }
@@ -59,7 +59,7 @@ function getAllTags(columnFilter) {
   return Object.keys(tagSet).sort();
 }
 
-function renderSearchBar(container, columnFilter) {
+function renderSearchBar(columnFilter) {
   var html = '<div class="search-bar">';
   html += '<input type="text" class="search-input" placeholder="' + t('search') + '" value="' + (currentSearchQuery || '') + '" onkeyup="handleSearch(event, \'' + (columnFilter||'') + '\')">';
   html += '<button class="search-btn" onclick="doSearch(\'' + (columnFilter||'') + '\')">' + t('searchBtn') + '</button>';
@@ -83,16 +83,12 @@ function handleSearch(event, columnFilter) {
 function doSearch(columnFilter) {
   var input = document.querySelector('.search-input');
   currentSearchQuery = input ? input.value.trim() : '';
-  var area = document.getElementById('main-content');
-  if (columnFilter === 'ai') renderAIColumn(area);
-  else renderBlogList(area);
+  renderCurrentPage();
 }
 
 function filterByTag(tag, columnFilter) {
   currentTagFilter = tag;
-  var area = document.getElementById('main-content');
-  if (columnFilter === 'ai') renderAIColumn(area);
-  else renderBlogList(area);
+  renderCurrentPage();
 }
 
 function renderPostList(posts, lang) {
@@ -107,7 +103,12 @@ function renderPostList(posts, lang) {
         return '<span class="post-tag">' + tag + '</span>';
       }).join('') + '</div>';
     }
-    html += '<div class="blog-item"><div class="blog-meta">' + (p.category||'') + ' &middot; ' + (p.date||'') + '</div><h3 onclick="navigate(\'blog\',\'' + p.slug + '\')">' + title + '</h3><p class="blog-excerpt">' + excerpt + '</p>' + tagsHtml + '</div>';
+    html += '<div class="blog-item">';
+    html += '<div class="blog-meta"><span class="meta-cat">' + (p.category||'') + '</span> · ' + (p.date||'') + '</div>';
+    html += '<h3 onclick="navigate(\'blog\',\'' + p.slug + '\')">' + title + '</h3>';
+    html += '<p class="blog-excerpt">' + excerpt + '</p>';
+    html += tagsHtml;
+    html += '</div>';
   });
   return html;
 }
@@ -116,7 +117,7 @@ function renderBlogList(container) {
   var lang = currentLang;
   var posts = getFilteredPosts(null);
   var html = '<div class="blog-list">';
-  html += renderSearchBar(container, '');
+  html += renderSearchBar('');
   html += renderPostList(posts, lang);
   html += '</div>';
   container.innerHTML = html;
@@ -127,7 +128,7 @@ function renderAIColumn(container) {
   var posts = getFilteredPosts('ai');
   var html = '<div class="ai-column">';
   html += '<div class="ai-column-header"><h2>' + t('aiColumnTitle') + '</h2><p>' + t('aiColumnDesc') + '</p></div>';
-  html += renderSearchBar(container, 'ai');
+  html += renderSearchBar('ai');
   html += '<div class="blog-list">';
   html += renderPostList(posts, lang);
   html += '</div></div>';
@@ -143,13 +144,14 @@ async function renderPost(slug, container) {
     var res = await fetch('posts/' + file);
     var md = await res.text();
     var html = marked.parse(md);
+    var backPage = (post.column === 'ai') ? 'ai' : 'blog';
     var tagsHtml = '';
     if (post.tags && post.tags.length) {
       tagsHtml = '<div class="post-tags-detail">' + post.tags.map(function(tag) {
         return '<span class="post-tag">' + tag + '</span>';
       }).join('') + '</div>';
     }
-    container.innerHTML = '<p><a href="#" onclick="event.preventDefault(); navigate(\'' + (post.column === 'ai' ? 'ai' : 'blog') + '\');">' + t('back') + '</a></p><article>' + html + '</article>' + tagsHtml;
+    container.innerHTML = '<p style="margin-bottom:16px"><a href="#" onclick="event.preventDefault(); navigate(\'' + backPage + '\');" style="color:var(--accent-dark);font-weight:500">' + t('back') + '</a></p><article>' + html + '</article>' + tagsHtml;
   } catch(e) { container.innerHTML = '<p>Failed to load post.</p>'; }
 }
 
@@ -159,25 +161,27 @@ async function renderMarkdownPage(basePath, container) {
   try {
     var res = await fetch(file);
     if (!res.ok) res = await fetch(basePath + '.en.md');
-    if (!res.ok) { container.innerHTML = '<h1>' + currentPage + '</h1><p style="color:#aaa">' + t('coming') + '</p>'; return; }
+    if (!res.ok) { container.innerHTML = '<div style="text-align:center;padding:60px 0;color:var(--text-light)">' + t('coming') + '</div>'; return; }
     var md = await res.text();
-    container.innerHTML = marked.parse(md);
-  } catch(e) { container.innerHTML = '<h1>' + currentPage + '</h1><p>' + t('coming') + '</p>'; }
+    container.innerHTML = '<article>' + marked.parse(md) + '</article>';
+  } catch(e) { container.innerHTML = '<div style="text-align:center;padding:60px 0;color:var(--text-light)">' + t('coming') + '</div>'; }
 }
 
 function renderSidebarPosts() {
   var el = document.getElementById('sidebar-posts');
+  if (!el) return;
   var lang = currentLang;
   var recent = postsIndex.slice(0, 5);
-  if (recent.length === 0) { el.innerHTML = '<p style="color:#aaa;font-size:0.85em;text-align:center">No posts yet</p>'; return; }
+  if (recent.length === 0) { el.innerHTML = '<p style="color:var(--text-light);font-size:0.82em;text-align:center">No posts yet</p>'; return; }
   el.innerHTML = recent.map(function(p) {
     var title = lang === 'zh' ? (p.title_zh || p.title) : p.title;
-    return '<div class="rp-item" onclick="navigate(\'blog\',\'' + p.slug + '\')"><div class="rp-cat">' + (p.category||'Uncategorized') + '</div><div class="rp-title">' + title + '</div><div class="rp-date">' + (p.date||'') + '</div></div>';
+    return '<div class="rp-item" onclick="navigate(\'blog\',\'' + p.slug + '\')"><div class="rp-cat">' + (p.category||'') + '</div><div class="rp-title">' + title + '</div><div class="rp-date">' + (p.date||'') + '</div></div>';
   }).join('');
 }
 
 function renderToolsDropdown() {
   var dd = document.getElementById('tools-dropdown');
+  if (!dd) return;
   if (siteConfig && siteConfig.tools) {
     dd.innerHTML = siteConfig.tools.map(function(t) { return '<a href="' + (t.url||'#') + '" target="_blank">' + t.name + '</a>'; }).join('');
   }

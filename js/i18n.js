@@ -36,18 +36,20 @@ var I18N = {
     aiColumnDesc: 'In-depth articles on artificial intelligence, LLMs, prompt engineering, and more.'
   }
 };
+
 var currentLang = navigator.language.startsWith('zh') ? 'zh' : 'en';
-function t(key) { return (I18N[currentLang] && I18N[currentLang][key]) || (I18N.en[key]) || key; }
+
+function t(key) {
+  return (I18N[currentLang] && I18N[currentLang][key]) || (I18N.en[key]) || key;
+}
+
 function toggleLang() {
   currentLang = currentLang === 'zh' ? 'en' : 'zh';
   applyI18n();
   renderSidebarPosts();
-  var area = document.getElementById('main-content');
-  if (currentPage === 'ai') { renderAIColumn(area); }
-  else if (currentPage === 'blog' && !currentSlug) { renderBlogList(area); }
-  else if (currentPage === 'blog' && currentSlug) { renderPost(currentSlug, area); }
-  else { renderMarkdownPage('pages/' + currentPage, area); }
+  renderCurrentPage();
 }
+
 function applyI18n() {
   var lang = I18N[currentLang];
   var el;
@@ -57,5 +59,6 @@ function applyI18n() {
     var key = e.getAttribute('data-i18n');
     if (lang[key]) e.textContent = lang[key];
   });
-  el = document.getElementById('lang-toggle'); if (el) el.textContent = currentLang === 'zh' ? 'EN' : '中文';
+  el = document.getElementById('lang-toggle');
+  if (el) el.textContent = currentLang === 'zh' ? 'EN' : '中文';
 }
