@@ -157,7 +157,6 @@ async function renderPost(slug, container) {
       }).join('') + '</div>';
     }
     container.innerHTML = '<p style="margin-bottom:16px"><a href="#" onclick="event.preventDefault(); navigate(\'' + backPage + '\');" style="color:var(--accent-dark);font-weight:500">' + t('back') + '</a></p><article>' + html + '</article>' + tagsHtml;
-    // Build TOC after article is rendered
     setTimeout(buildTOC, 100);
   } catch(e) { container.innerHTML = '<p>Failed to load post.</p>'; }
 }

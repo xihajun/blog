@@ -179,7 +179,17 @@ a:hover { color: var(--accent); }
 }
 
 /* ===== Sidebar ===== */
-.sidebar { width: 260px; flex-shrink: 0; }
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 76px;
+  align-self: flex-start;
+  max-height: calc(100vh - 92px);
+  overflow-y: auto;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 .sidebar-card {
   background: var(--bg);
   border-radius: var(--radius);
@@ -408,23 +418,10 @@ a:hover { color: var(--accent); }
 
 .no-results { color: var(--text-light); text-align: center; padding: 48px 0; font-size: 0.95em; }
 
-/* ===== Floating TOC ===== */
-.toc-float {
-  position: fixed;
-  left: max(16px, calc((100vw - 1100px) / 2 - 220px));
-  top: 80px;
-  width: 200px;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-  background: var(--bg);
-  border-radius: var(--radius);
-  box-shadow: var(--card-shadow);
-  padding: 16px;
-  z-index: 50;
-  transition: opacity 0.3s;
+/* ===== Sidebar TOC ===== */
+.toc-wrapper {
+  /* lives inside .sidebar-section, no extra positioning needed */
 }
-.toc-float::-webkit-scrollbar { width: 3px; }
-.toc-float::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 .toc-header {
   font-size: 0.72em;
   color: var(--text-light);
@@ -466,7 +463,6 @@ a:hover { color: var(--accent); }
 .toc-h2 { padding-left: 8px; }
 .toc-h3 { padding-left: 20px; font-size: 0.72em; }
 
-/* TOC reading progress bar */
 .toc-progress {
   margin-top: 12px;
   height: 3px;
@@ -541,14 +537,10 @@ article a:hover { border-bottom-color: var(--accent-dark); text-decoration: none
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 1400px) {
-  .toc-float { display: none; }
-}
 @media (max-width: 768px) {
   .layout { flex-direction: column; padding: 20px 16px; gap: 20px; }
-  .sidebar { width: 100%; }
+  .sidebar { width: 100%; position: static; max-height: none; }
   .top-nav { display: none; }
   .header-inner { padding: 0 16px; }
   article { padding: 24px 18px; }
-  .toc-float { display: none; }
 }
