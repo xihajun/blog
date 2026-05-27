@@ -13,6 +13,7 @@ function renderCurrentPage() {
   if (currentPostSlug) { renderPost(currentPostSlug, area); return; }
   switch (currentPage) {
     case 'blog': renderBlogList(area); break;
+    case 'ai': renderAIColumn(area); break;
     case 'research': renderMarkdownPage('pages/research', area); break;
     case 'teaching': renderMarkdownPage('pages/teaching', area); break;
     case 'tools': renderMarkdownPage('pages/tools', area); break;
