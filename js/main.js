@@ -1,5 +1,8 @@
 var siteConfig = null;
 var postsIndex = [];
+var currentSearchQuery = '';
+var currentTagFilter = '';
+
 async function loadConfig() {
   try {
     var res = await fetch('config.json');
@@ -14,22 +17,123 @@ async function loadConfig() {
     }
   } catch(e) { console.log('No config.json found, using defaults.'); }
 }
+
 async function loadPostsIndex() {
   try { var res = await fetch('posts/index.json'); postsIndex = await res.json(); } catch(e) { postsIndex = []; }
 }
-function renderBlogList(container) {
+
+function getFilteredPosts(columnFilter) {
   var lang = currentLang;
-  var posts = postsIndex.filter(function(p) { return !p.lang || p.lang === lang || p.lang === 'both'; });
-  var html = '<div class="blog-list">';
-  if (posts.length === 0) html += '<p style="color:#aaa;text-align:center;padding:40px 0;">No posts yet.</p>';
+  var posts = postsIndex.filter(function(p) {
+    return !p.lang || p.lang === lang || p.lang === 'both';
+  });
+  if (columnFilter) {
+    posts = posts.filter(function(p) { return p.column === columnFilter; });
+  }
+  if (currentTagFilter) {
+    posts = posts.filter(function(p) {
+      return p.tags && p.tags.indexOf(currentTagFilter) !== -1;
+    });
+  }
+  if (currentSearchQuery) {
+    var q = currentSearchQuery.toLowerCase();
+    posts = posts.filter(function(p) {
+      var title = lang === 'zh' ? (p.title_zh || p.title) : p.title;
+      var excerpt = lang === 'zh' ? (p.excerpt_zh || p.excerpt || '') : (p.excerpt || '');
+      var tags = (p.tags || []).join(' ');
+      return title.toLowerCase().indexOf(q) !== -1 ||
+             excerpt.toLowerCase().indexOf(q) !== -1 ||
+             (p.category || '').toLowerCase().indexOf(q) !== -1 ||
+             tags.toLowerCase().indexOf(q) !== -1;
+    });
+  }
+  return posts;
+}
+
+function getAllTags(columnFilter) {
+  var tagSet = {};
+  postsIndex.forEach(function(p) {
+    if (columnFilter && p.column !== columnFilter) return;
+    if (p.tags) p.tags.forEach(function(tag) { tagSet[tag] = true; });
+  });
+  return Object.keys(tagSet).sort();
+}
+
+function renderSearchBar(container, columnFilter) {
+  var html = '<div class="search-bar">';
+  html += '<input type="text" class="search-input" placeholder="' + t('search') + '" value="' + (currentSearchQuery || '') + '" onkeyup="handleSearch(event, \'' + (columnFilter||'') + '\')">';
+  html += '<button class="search-btn" onclick="doSearch(\'' + (columnFilter||'') + '\')">' + t('searchBtn') + '</button>';
+  html += '</div>';
+  var tags = getAllTags(columnFilter);
+  if (tags.length > 0) {
+    html += '<div class="tag-bar">';
+    html += '<span class="tag-chip' + (!currentTagFilter ? ' active' : '') + '" onclick="filterByTag(\'\', \'' + (columnFilter||'') + '\')">' + t('allTags') + '</span>';
+    tags.forEach(function(tag) {
+      html += '<span class="tag-chip' + (currentTagFilter === tag ? ' active' : '') + '" onclick="filterByTag(\'' + tag + '\', \'' + (columnFilter||'') + '\')">' + tag + '</span>';
+    });
+    html += '</div>';
+  }
+  return html;
+}
+
+function handleSearch(event, columnFilter) {
+  if (event.key === 'Enter') doSearch(columnFilter);
+}
+
+function doSearch(columnFilter) {
+  var input = document.querySelector('.search-input');
+  currentSearchQuery = input ? input.value.trim() : '';
+  var area = document.getElementById('main-content');
+  if (columnFilter === 'ai') renderAIColumn(area);
+  else renderBlogList(area);
+}
+
+function filterByTag(tag, columnFilter) {
+  currentTagFilter = tag;
+  var area = document.getElementById('main-content');
+  if (columnFilter === 'ai') renderAIColumn(area);
+  else renderBlogList(area);
+}
+
+function renderPostList(posts, lang) {
+  if (posts.length === 0) return '<p class="no-results">' + t('noResults') + '</p>';
+  var html = '';
   posts.forEach(function(p) {
     var title = lang === 'zh' ? (p.title_zh || p.title) : p.title;
     var excerpt = lang === 'zh' ? (p.excerpt_zh || p.excerpt || '') : (p.excerpt || '');
-    html += '<div class="blog-item"><div class="blog-meta">' + (p.category||'') + ' &middot; ' + (p.date||'') + '</div><h3 onclick="navigate(\'blog\',\'' + p.slug + '\')">' + title + '</h3><p class="blog-excerpt">' + excerpt + '</p></div>';
+    var tagsHtml = '';
+    if (p.tags && p.tags.length) {
+      tagsHtml = '<div class="blog-tags">' + p.tags.map(function(tag) {
+        return '<span class="post-tag">' + tag + '</span>';
+      }).join('') + '</div>';
+    }
+    html += '<div class="blog-item"><div class="blog-meta">' + (p.category||'') + ' &middot; ' + (p.date||'') + '</div><h3 onclick="navigate(\'blog\',\'' + p.slug + '\')">' + title + '</h3><p class="blog-excerpt">' + excerpt + '</p>' + tagsHtml + '</div>';
   });
+  return html;
+}
+
+function renderBlogList(container) {
+  var lang = currentLang;
+  var posts = getFilteredPosts(null);
+  var html = '<div class="blog-list">';
+  html += renderSearchBar(container, '');
+  html += renderPostList(posts, lang);
   html += '</div>';
   container.innerHTML = html;
 }
+
+function renderAIColumn(container) {
+  var lang = currentLang;
+  var posts = getFilteredPosts('ai');
+  var html = '<div class="ai-column">';
+  html += '<div class="ai-column-header"><h2>' + t('aiColumnTitle') + '</h2><p>' + t('aiColumnDesc') + '</p></div>';
+  html += renderSearchBar(container, 'ai');
+  html += '<div class="blog-list">';
+  html += renderPostList(posts, lang);
+  html += '</div></div>';
+  container.innerHTML = html;
+}
+
 async function renderPost(slug, container) {
   var post = postsIndex.find(function(p) { return p.slug === slug; });
   if (!post) { container.innerHTML = '<p>Post not found.</p>'; return; }
@@ -39,20 +143,28 @@ async function renderPost(slug, container) {
     var res = await fetch('posts/' + file);
     var md = await res.text();
     var html = marked.parse(md);
-    container.innerHTML = '<p><a href="#" onclick="event.preventDefault(); navigate(\'blog\');">' + I18N[lang].back + '</a></p><article>' + html + '</article>';
+    var tagsHtml = '';
+    if (post.tags && post.tags.length) {
+      tagsHtml = '<div class="post-tags-detail">' + post.tags.map(function(tag) {
+        return '<span class="post-tag">' + tag + '</span>';
+      }).join('') + '</div>';
+    }
+    container.innerHTML = '<p><a href="#" onclick="event.preventDefault(); navigate(\'' + (post.column === 'ai' ? 'ai' : 'blog') + '\');">' + t('back') + '</a></p><article>' + html + '</article>' + tagsHtml;
   } catch(e) { container.innerHTML = '<p>Failed to load post.</p>'; }
 }
+
 async function renderMarkdownPage(basePath, container) {
   var lang = currentLang;
   var file = lang === 'zh' ? basePath + '.zh.md' : basePath + '.en.md';
   try {
     var res = await fetch(file);
     if (!res.ok) res = await fetch(basePath + '.en.md');
-    if (!res.ok) { container.innerHTML = '<h1>' + currentPage + '</h1><p style="color:#aaa">' + I18N[lang].coming + '</p>'; return; }
+    if (!res.ok) { container.innerHTML = '<h1>' + currentPage + '</h1><p style="color:#aaa">' + t('coming') + '</p>'; return; }
     var md = await res.text();
     container.innerHTML = marked.parse(md);
-  } catch(e) { container.innerHTML = '<h1>' + currentPage + '</h1><p>' + I18N[lang].coming + '</p>'; }
+  } catch(e) { container.innerHTML = '<h1>' + currentPage + '</h1><p>' + t('coming') + '</p>'; }
 }
+
 function renderSidebarPosts() {
   var el = document.getElementById('sidebar-posts');
   var lang = currentLang;
@@ -63,13 +175,16 @@ function renderSidebarPosts() {
     return '<div class="rp-item" onclick="navigate(\'blog\',\'' + p.slug + '\')"><div class="rp-cat">' + (p.category||'Uncategorized') + '</div><div class="rp-title">' + title + '</div><div class="rp-date">' + (p.date||'') + '</div></div>';
   }).join('');
 }
+
 function renderToolsDropdown() {
   var dd = document.getElementById('tools-dropdown');
   if (siteConfig && siteConfig.tools) {
     dd.innerHTML = siteConfig.tools.map(function(t) { return '<a href="' + (t.url||'#') + '" target="_blank">' + t.name + '</a>'; }).join('');
   }
 }
+
 function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
 document.addEventListener('DOMContentLoaded', async function() {
   await loadConfig();
   await loadPostsIndex();
