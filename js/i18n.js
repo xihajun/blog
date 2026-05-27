@@ -15,7 +15,9 @@ var I18N = {
     noResults: '没有找到匹配的文章',
     allTags: '全部',
     aiColumnTitle: 'AI 专栏',
-    aiColumnDesc: '关于人工智能、大模型、提示工程等前沿技术的深度文章。'
+    aiColumnDesc: '关于人工智能、大模型、提示工程等前沿技术的深度文章。',
+    blogColumnTitle: '手写博客',
+    blogColumnDesc: '亲手撰写的原创文章，关于技术、生活和思考。'
   },
   en: {
     name: 'Junfan Huang',
@@ -33,7 +35,9 @@ var I18N = {
     noResults: 'No matching posts found',
     allTags: 'All',
     aiColumnTitle: 'AI Column',
-    aiColumnDesc: 'In-depth articles on artificial intelligence, LLMs, prompt engineering, and more.'
+    aiColumnDesc: 'In-depth articles on artificial intelligence, LLMs, prompt engineering, and more.',
+    blogColumnTitle: 'Hand-Written Blog',
+    blogColumnDesc: 'Original articles written by hand, on tech, life, and reflections.'
   }
 };
 

@@ -115,11 +115,13 @@ function renderPostList(posts, lang) {
 
 function renderBlogList(container) {
   var lang = currentLang;
-  var posts = getFilteredPosts(null);
-  var html = '<div class="blog-list">';
-  html += renderSearchBar('');
+  var posts = getFilteredPosts('blog');
+  var html = '<div class="blog-column">';
+  html += '<div class="column-header blog-column-header"><h2>✍️ ' + t('blogColumnTitle') + '</h2><p>' + t('blogColumnDesc') + '</p></div>';
+  html += renderSearchBar('blog');
+  html += '<div class="blog-list">';
   html += renderPostList(posts, lang);
-  html += '</div>';
+  html += '</div></div>';
   container.innerHTML = html;
 }
 
@@ -127,7 +129,7 @@ function renderAIColumn(container) {
   var lang = currentLang;
   var posts = getFilteredPosts('ai');
   var html = '<div class="ai-column">';
-  html += '<div class="ai-column-header"><h2>' + t('aiColumnTitle') + '</h2><p>' + t('aiColumnDesc') + '</p></div>';
+  html += '<div class="ai-column-header"><h2>🤖 ' + t('aiColumnTitle') + '</h2><p>' + t('aiColumnDesc') + '</p></div>';
   html += renderSearchBar('ai');
   html += '<div class="blog-list">';
   html += renderPostList(posts, lang);

@@ -6,7 +6,7 @@
     "date": "2026-05-27",
     "category": "Tech",
     "tags": ["blog", "intro"],
-    "column": "general",
+    "column": "blog",
     "excerpt": "Welcome to my new blog built with pure HTML and Markdown.",
     "excerpt_zh": "欢迎来到我用纯 HTML 和 Markdown 搭建的新博客。",
     "file": "hello-world.en.md",
@@ -20,7 +20,7 @@
     "date": "2023-09-12",
     "category": "ChatGPT / Scripts",
     "tags": ["AI", "ChatGPT", "automation"],
-    "column": "ai",
+    "column": "blog",
     "excerpt": "How to use ChatGPT to automate code merging workflows.",
     "excerpt_zh": "如何用 ChatGPT 自动化代码合并流程。",
     "file": "chatgpt-merge.en.md",
@@ -53,6 +53,20 @@
     "excerpt_zh": "如何用 Ollama、llama.cpp 等工具在自己的电脑上运行开源大模型。",
     "file": "local-llm.en.md",
     "file_zh": "local-llm.zh.md",
+    "lang": "both"
+  },
+  {
+    "slug": "ai-plagiarism",
+    "title": "When Plagiarism Costs Nothing, 'Original' Loses Its Meaning",
+    "title_zh": "当洗稿成本归零，「原创」就失去了定义",
+    "date": "2026-05-27",
+    "category": "AI",
+    "tags": ["AI", "copyright", "content", "detection"],
+    "column": "ai",
+    "excerpt": "AI rewrites can replicate 80% of an article's value while scoring 100% on originality checks. What happens when our definition of 'original' breaks down?",
+    "excerpt_zh": "AI 改写可以零成本获取文章 80% 的价值，同时在检测系统眼中拥有 100% 的「原创性」。当「原创」的定义失效，我们该信任谁？",
+    "file": "ai-plagiarism.en.md",
+    "file_zh": "ai-plagiarism.zh.md",
     "lang": "both"
   }
 ]
