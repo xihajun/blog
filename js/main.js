@@ -104,7 +104,7 @@ function renderPostList(posts, lang) {
       }).join('') + '</div>';
     }
     html += '<div class="blog-item">';
-    html += '<div class="blog-meta"><span class="meta-cat">' + (p.category||'') + '</span> · ' + (p.date||'') + '</div>';
+    html += '<div class="blog-meta"><span class="meta-cat">' + (p.category||'') + '</span> \u00b7 ' + (p.date||'') + '</div>';
     html += '<h3 onclick="navigate(\'blog\',\'' + p.slug + '\')">' + title + '</h3>';
     html += '<p class="blog-excerpt">' + excerpt + '</p>';
     html += tagsHtml;
@@ -114,10 +114,11 @@ function renderPostList(posts, lang) {
 }
 
 function renderBlogList(container) {
+  removeTOC();
   var lang = currentLang;
   var posts = getFilteredPosts('blog');
   var html = '<div class="blog-column">';
-  html += '<div class="column-header blog-column-header"><h2>✍️ ' + t('blogColumnTitle') + '</h2><p>' + t('blogColumnDesc') + '</p></div>';
+  html += '<div class="column-header blog-column-header"><h2>\u270d\ufe0f ' + t('blogColumnTitle') + '</h2><p>' + t('blogColumnDesc') + '</p></div>';
   html += renderSearchBar('blog');
   html += '<div class="blog-list">';
   html += renderPostList(posts, lang);
@@ -126,10 +127,11 @@ function renderBlogList(container) {
 }
 
 function renderAIColumn(container) {
+  removeTOC();
   var lang = currentLang;
   var posts = getFilteredPosts('ai');
   var html = '<div class="ai-column">';
-  html += '<div class="ai-column-header"><h2>🤖 ' + t('aiColumnTitle') + '</h2><p>' + t('aiColumnDesc') + '</p></div>';
+  html += '<div class="ai-column-header"><h2>\ud83e\udd16 ' + t('aiColumnTitle') + '</h2><p>' + t('aiColumnDesc') + '</p></div>';
   html += renderSearchBar('ai');
   html += '<div class="blog-list">';
   html += renderPostList(posts, lang);
@@ -138,6 +140,7 @@ function renderAIColumn(container) {
 }
 
 async function renderPost(slug, container) {
+  removeTOC();
   var post = postsIndex.find(function(p) { return p.slug === slug; });
   if (!post) { container.innerHTML = '<p>Post not found.</p>'; return; }
   var lang = currentLang;
@@ -154,10 +157,13 @@ async function renderPost(slug, container) {
       }).join('') + '</div>';
     }
     container.innerHTML = '<p style="margin-bottom:16px"><a href="#" onclick="event.preventDefault(); navigate(\'' + backPage + '\');" style="color:var(--accent-dark);font-weight:500">' + t('back') + '</a></p><article>' + html + '</article>' + tagsHtml;
+    // Build TOC after article is rendered
+    setTimeout(buildTOC, 100);
   } catch(e) { container.innerHTML = '<p>Failed to load post.</p>'; }
 }
 
 async function renderMarkdownPage(basePath, container) {
+  removeTOC();
   var lang = currentLang;
   var file = lang === 'zh' ? basePath + '.zh.md' : basePath + '.en.md';
   try {
@@ -166,6 +172,7 @@ async function renderMarkdownPage(basePath, container) {
     if (!res.ok) { container.innerHTML = '<div style="text-align:center;padding:60px 0;color:var(--text-light)">' + t('coming') + '</div>'; return; }
     var md = await res.text();
     container.innerHTML = '<article>' + marked.parse(md) + '</article>';
+    setTimeout(buildTOC, 100);
   } catch(e) { container.innerHTML = '<div style="text-align:center;padding:60px 0;color:var(--text-light)">' + t('coming') + '</div>'; }
 }
 
