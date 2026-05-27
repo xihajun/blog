@@ -2,11 +2,11 @@
   {
     "slug": "hello-world",
     "title": "Hello World: My First Post",
-    "title_zh": "\u4f60\u597d\u4e16\u754c\uff1a\u6211\u7684\u7b2c\u4e00\u7bc7\u6587\u7ae0",
+    "title_zh": "你好世界：我的第一篇文章",
     "date": "2026-05-27",
     "category": "Tech",
     "excerpt": "Welcome to my new blog built with pure HTML and Markdown.",
-    "excerpt_zh": "\u6b22\u8fce\u6765\u5230\u6211\u7528\u7eaf HTML \u548c Markdown \u642d\u5efa\u7684\u65b0\u535a\u5ba2\u3002",
+    "excerpt_zh": "欢迎来到我用纯 HTML 和 Markdown 搭建的新博客。",
     "file": "hello-world.en.md",
     "file_zh": "hello-world.zh.md",
     "lang": "both"
@@ -14,11 +14,11 @@
   {
     "slug": "chatgpt-merge",
     "title": "Let ChatGPT Help Merge Your Code",
-    "title_zh": "\u8ba9 ChatGPT \u5e2e\u4f60\u5408\u5e76\u4ee3\u7801",
+    "title_zh": "让 ChatGPT 帮你合并代码",
     "date": "2023-09-12",
     "category": "ChatGPT / Scripts",
     "excerpt": "How to use ChatGPT to automate code merging workflows.",
-    "excerpt_zh": "\u5982\u4f55\u7528 ChatGPT \u81ea\u52a8\u5316\u4ee3\u7801\u5408\u5e76\u6d41\u7a0b\u3002",
+    "excerpt_zh": "如何用 ChatGPT 自动化代码合并流程。",
     "file": "chatgpt-merge.en.md",
     "file_zh": "chatgpt-merge.zh.md",
     "lang": "both"

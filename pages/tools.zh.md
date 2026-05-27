@@ -1,10 +1,10 @@
-# \u5de5\u5177
+# 工具
 
-| \u5de5\u5177 | \u63cf\u8ff0 |
+| 工具 | 描述 |
 |------|------|
-| **IssueGPT** | AI \u9a71\u52a8\u7684 Issue \u7ba1\u7406 |
-| **Spelling Corrector** | \u76d6\u5c14\u8bed\u62fc\u5199\u7ea0\u9519 |
-| **COBRA** | \u57fa\u56e0\u7ec4\u5206\u6790\u5de5\u5177 |
-| **ISGverse** | \u57fa\u56e0\u7ec4\u6570\u636e\u6d4f\u89c8\u5668 |
-| **Footprints detector** | \u57fa\u56e0\u7ec4\u8db3\u8ff9\u5206\u6790 |
-| **visualisation-tool** | \u6570\u636e\u53ef\u89c6\u5316\u5de5\u5177 |
+| **IssueGPT** | AI 驱动的 Issue 管理 |
+| **Spelling Corrector** | 盖尔语拼写纠错 |
+| **COBRA** | 基因组分析工具 |
+| **ISGverse** | 基因组数据浏览器 |
+| **Footprints detector** | 基因组足迹分析 |
+| **visualisation-tool** | 数据可视化工具 |

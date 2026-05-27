@@ -3,7 +3,7 @@
   "name_zh": "Junfan Huang",
   "avatar": "assets/avatar.png",
   "bio_en": "A not-so-boring Researcher who like coding and Coca-Cola.",
-  "bio_zh": "\u4e00\u4e2a\u4e0d\u90a3\u4e48\u65e0\u804a\u7684\u7814\u7a76\u8005\uff0c\u559c\u6b22\u5199\u4ee3\u7801\u548c\u559d\u53ef\u4e50\u3002",
+  "bio_zh": "一个不那么无聊的研究者，喜欢写代码和喝可乐。",
   "social": [
     { "icon": "globe", "url": "https://jun.2333.fun/", "title": "Website" },
     { "icon": "star", "url": "https://github.com/xihajun", "title": "GitHub" },
@@ -13,8 +13,8 @@
   "tools": [
     { "name": "IssueGPT", "url": "#" },
     { "name": "Spelling Corrector", "url": "#" },
-    { "name": "COBRA \u2013 genomics", "url": "#" },
-    { "name": "ISGverse \u2013 genomics", "url": "#" },
+    { "name": "COBRA – genomics", "url": "#" },
+    { "name": "ISGverse – genomics", "url": "#" },
     { "name": "Footprints detector", "url": "#" },
     { "name": "visualisation-tool", "url": "#" }
   ]
