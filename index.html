@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img src="assets/avatar.png" alt="Avatar" class="avatar" onerror="this.src='https://via.placeholder.com/120?text=Avatar'">
+      <h2 class="name" data-i18n="name">Junfan Huang</h2>
+      <p class="bio" data-i18n="bio">A not-so-boring Researcher who like coding and Coca-Cola.</p>
+    </div>
+    <div class="social-icons">
+      <a href="#" class="icon-btn" title="Website">&#127760;</a>
+      <a href="https://github.com/xihajun" class="icon-btn" title="GitHub">&#11088;</a>
+      <a href="#" class="icon-btn" title="Contact">&#128172;</a>
+      <a href="#" class="icon-btn" title="RSS">&#128225;</a>
+    </div>
+    <div class="recent-posts" id="sidebar-posts"></div>
+  </aside>
+  <main class="main">
+    <nav class="topnav">
+      <a href="#" data-page="research" data-i18n="nav_research">Research</a>
+      <a href="#" data-page="teaching" data-i18n="nav_teaching">Teaching</a>
+      <div class="dropdown">
+        <a href="#" data-page="tools" data-i18n="nav_tools">Tools &#9662;</a>
+        <div class="dropdown-content" id="tools-dropdown"></div>
+      </div>
+      <a href="#" data-page="projects" data-i18n="nav_projects">Projects</a>
+      <a href="#" data-page="blog" data-i18n="nav_blog">Blog</a>
+      <button class="lang-btn" id="lang-toggle" onclick="toggleLang()">EN / &#20013;</button>
+    </nav>
+    <div class="content-area" id="content-area">
+      <div id="page-content"></div>
+    </div>
+  </main>
+</div>
+<footer class="footer">
+  <a href="#" onclick="scrollToTop()" class="back-top">&#11014;</a>
+  <p>Powered by Pure HTML &middot; <span data-i18n="footer">Built with &#10084;&#65039;</span></p>
+</footer>
+<script src="js/i18n.js"></script>
+<script src="js/router.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
