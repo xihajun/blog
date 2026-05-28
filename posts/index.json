@@ -1,5 +1,19 @@
 [
   {
+    "slug": "distill-writing-skill",
+    "title": "How I Distilled a Writing Skill from yage.ai",
+    "title_zh": "我从 yage.ai 的文章里「蒸馏」出了一个写作 skill",
+    "date": "2026-05-28",
+    "category": "Writing",
+    "tags": ["AI", "writing", "skill", "yage.ai"],
+    "column": "blog",
+    "excerpt": "I fed every article from yage.ai into Opus 4.6 and asked it to find structural patterns. Then I turned those patterns into an executable writing skill.",
+    "excerpt_zh": "把 yage.ai 的所有文章丢给 Opus 4.6 找结构共性，再蒸馏成一个可执行的写作 skill。三轮 prompt，从分析到产出。",
+    "file": "distill-writing-skill.en.md",
+    "file_zh": "distill-writing-skill.zh.md",
+    "lang": "both"
+  },
+  {
     "slug": "hello-world",
     "title": "Hello World: My First Post",
     "title_zh": "你好世界：我的第一篇文章",
