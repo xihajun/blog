@@ -1,5 +1,47 @@
 [
   {
+    "slug": "hate-pretending",
+    "title": "What You Hate Isn't Management — It's Being Asked to Pretend",
+    "title_zh": "你讨厌的不是管理，是被要求假装",
+    "date": "2026-06-05",
+    "category": "Work",
+    "tags": ["management", "work", "organization", "authenticity"],
+    "column": "blog",
+    "excerpt": "What people resist isn't being managed — it's being asked to perform a role they don't believe in.",
+    "excerpt_zh": "人们抵触的从来不是被管理，而是被要求扮演一个自己都不相信的角色。",
+    "file": "hate-pretending.en.md",
+    "file_zh": "hate-pretending.zh.md",
+    "lang": "both"
+  },
+  {
+    "slug": "llm-negation",
+    "title": "When You Say \"Don't,\" the Model Hears \"Do\"",
+    "title_zh": "你说「不要」，模型听到的是「要」",
+    "date": "2026-06-04",
+    "category": "AI",
+    "tags": ["AI", "LLM", "negation", "cognition"],
+    "column": "ai",
+    "excerpt": "From Dostoevsky's polar bear to BERT's blind spot: why 'not' is the hardest word for any information-processing system to execute.",
+    "excerpt_zh": "从陀思妥耶夫斯基的北极熊到 BERT 的盲区：为什么「不」这个字是任何信息处理系统都最难执行的。",
+    "file": "llm-negation.en.md",
+    "file_zh": "llm-negation.zh.md",
+    "lang": "both"
+  },
+  {
+    "slug": "cognitive-precocity",
+    "title": "Cognitive Precocity: Why Some People Have Profound Insight So Young",
+    "title_zh": "认知早熟：为什么有的人可以很年轻就有很深刻的认知",
+    "date": "2026-06-03",
+    "category": "Insight",
+    "tags": ["thinking", "cognition", "growth", "game theory"],
+    "column": "blog",
+    "excerpt": "It's not talent or luck. Cognitive depth = information density × feedback frequency × pattern recognition — and which dimension you optimize matters most.",
+    "excerpt_zh": "不是天赋，也不是运气。认知深度 = 信息密度 × 反馈频率 × 模式识别——而你优化的是哪个维度最重要。",
+    "file": "cognitive-precocity.en.md",
+    "file_zh": "cognitive-precocity.zh.md",
+    "lang": "both"
+  },
+  {
     "slug": "distill-writing-skill",
     "title": "How I Distilled a Writing Skill from yage.ai",
     "title_zh": "我从 yage.ai 的文章里「蒸馏」出了一个写作 skill",
