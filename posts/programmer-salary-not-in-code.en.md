@@ -1,0 +1,77 @@
+# A Programmer's High Salary Was Never in the Code
+
+In the spring of 2025, a computer science new grad sent his resume to the three-hundredth company. His GitHub had a respectable full-stack project, and over four years he'd learned all the data structures, algorithms, and operating systems he was supposed to. Three years earlier, a senior of his with a roughly equivalent resume landed five offers in the fall recruiting season, two of them above 300k RMB. Now he mostly gets no reply, and the occasional rejection. In one interview someone said it plainly: that practice project of yours — we can have Cursor build it in half a day now.
+
+What he can't figure out is this: programming itself, from his first year to graduation, hasn't gotten any harder. So what actually changed?
+
+His gut feeling is borne out by the data. At the 15 largest US tech companies, new-grad hiring fell [25%](https://spectrum.ieee.org/ai-effect-entry-level-jobs) in 2024 versus 2023. And the unemployment rate for the 22–27 age band hit [7.4%](https://stackoverflow.blog/2025/12/26/ai-vs-gen-z/) by June 2025, nearly twice the national average. In three years, the same major, the same ability — even a harder-working cohort — got the opposite result. Only one big thing happened in between.
+
+## How the high salary came about in the first place
+
+To figure out what changed, we first have to figure out how the programmer's high salary came about in the first place.
+
+A widespread misconception: programmers earn a lot because programming is hard, the barrier is high. That doesn't hold up. The barrier to entry is actually quite low — no license, no degree required, a computer and free tutorials are enough to start. Learning a language's syntax takes a day or two; in a week you can write a working little program. What's truly hard was never the syntax, but turning a fuzzy real-world problem into a reliable, maintainable, failure-resistant system.
+
+So where does the high pay come from? A much-cited [comment](https://news.ycombinator.com/item?id=21904283) on Hacker News put it clearly: wages are set by two things — supply and demand, and the marginal value a person can create. What's special about software is that its marginal value is absurdly high, because it scales. A line of code one engineer writes can serve a million people at once, with a marginal copying cost near zero. This kind of leverage is extremely rare in human economic activity: even the best doctor can only see a few dozen patients a day, but the payment system written by even an average great programmer can process hundreds of millions of transactions.
+
+So a programmer's high salary is two things stacked together: the extreme scaling leverage of software, which makes the ceiling on marginal value very high; and the fact that for the past thirty years demand far outran supply, making the thing scarce. BLS data shows the median wage for software developers in 2024 was about [$133k](https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm), roughly more than double the US median.
+
+One more thing worth noting. The prophecy that "programmers will be replaced" is not new. When COBOL was invented in the 1950s, one of its selling points was "let business people write the logic themselves, no more need for programmers." Sixty years on, this prophecy revives every few years, and the result is more and more programmers and higher and higher wages. This history is the bedrock for understanding the current shock: a tool making one layer of work easier does not naturally mean the profession disappears. But it also can't prove this time will be the same.
+
+## What AI commoditizes is the least valuable layer
+
+Now put AI into this framework.
+
+What AI truly commoditizes is the most surface-level piece of a programmer's work: translating a clearly-conceived feature into syntactically correct code. CRUD, boilerplate, unit tests, fixing a syntax error — AI does these fast and cheap. Research supports this: generative AI delivers the [largest](https://aliciasassermodestino.com/wp-content/uploads/2025/06/Impact_of_GenAI_on_SWEs_061625.pdf) productivity gains to low-skill, junior developers, because what it fills in is exactly the gap between novice and expert in "writing the idea as correct code."
+
+But here's a counterintuitive finding. In 2025 METR ran a [controlled experiment](https://www.reddit.com/r/ExperiencedDevs/comments/1lwk503/study_experienced_devs_think_they_are_24_faster/), having experienced open-source developers use AI tools on real projects they knew well. The developers themselves expected AI to make them 24% faster, and even after finishing still felt 20% faster. The measured result: they were 19% slower. On the complex, deeply-contextual tasks they truly mastered, AI actually slowed them down, because writing prompts, managing context, and reviewing code you didn't write are themselves costs.
+
+Put the two findings together and the contradiction surfaces: AI flattens the value of the "execution" layer, but high pay was never mainly attached to execution — it's attached to the judgment layer: figuring out what to build, why to build it that way, and who's responsible when something breaks. The former is becoming dirt cheap; the latter is getting scarcer. This explains the seemingly split market: junior roles collapsing on one side, senior and AI-related skills appreciating on the other. One analysis estimated nearly an [18% salary premium](https://www.sundeepteki.org/advice/impact-of-ai-on-the-2025-software-engineering-job-market) for engineers who can wield AI. The same profession, at the same time, is being priced in two directions.
+
+## Why the price splits into three layers
+
+Why is this happening? Several economic mechanisms are at work simultaneously.
+
+First, skills shifted from complementary to substitutable. The mainstream theory explaining wage gaps for the past thirty years is "skill-biased technical change": technologies like computers are complementary to high-skill labor, so they raised the relative wages of the educated. But this AI round is different. When AI can directly substitute the "codifiable, standardizable" part of a skill, it is a substitute for that skill, not a complement. The skill itself gets commoditized. Economists Fukui, Nakamura, and Steinsson have a paper titled exactly ["The Commoditization of Labor"](https://masaofukui.github.io/Commoditization.pdf), with a sharp point: technical progress simplifies work and raises productivity, but at the same time makes workers "anyone can do it." Once anyone can do it, the worker's bargaining power collapses, firms find it easier to fill posts, and wages are pushed down. So commoditization has two faces: productivity rises (the pie grows), and bargaining power falls (the ability to claim a slice weakens). For the commoditized layer of skill, these two forces point in opposite directions.
+
+Second, will demand explode — the old question of Jevons' paradox.
+
+In 1865, economist Jevons noticed something counterintuitive: as steam engines burned coal more efficiently, Britain's coal consumption didn't fall but soared. Because higher efficiency lowered the effective cost of using coal, coal's uses multiplied, and total consumption went up. Many apply this logic to AI coding: if writing software becomes extremely cheap, will demand explode and require even more programmers? History offers examples on both sides. The positive one is ATMs and bank tellers: ATMs appeared in 1969, everyone thought tellers were doomed, yet by 2010 the number of tellers had roughly [doubled](https://www.ignorance.ai/p/jevons-paradox-and-the-future-of) versus 1970, because the cost per branch dropped and banks opened more branches. The negative one is travel agents: also hit by technology, their numbers peaked in the 1990s and declined ever since, never recovering. What's the difference? For Jevons' paradox to hold, one condition must be met: demand is elastic enough that when price drops, the increase in demand outweighs the reduction in per-unit usage. Software has probably met this for the past few decades. But it's not an iron law. When a field's demand approaches saturation, or price is no longer the bottleneck, efficiency gains just mean doing the same work with fewer people. Whether AI coding takes the ATM path or the travel-agent path is undecided, and likely different sub-fields will take different paths.
+
+Combine the first two points, and the market's pricing of the catch-all profession "programmer" splits into several layers.
+
+| Layer | Content | Price trend in the AI era |
+| --- | --- | --- |
+| Execution layer | CRUD, boilerplate, fixing syntax errors | Collapses toward AI's marginal cost (near zero) |
+| Steering layer | Writing specs, validating output, backstopping when AI errs | Short-term premium |
+| Judgment & responsibility layer | Deciding what to build, owning reliability and consequences | AI can't touch it yet — worth more, not less |
+
+Within this layered structure, both optimistic and pessimistic futures have been argued. David Autor leans optimistic: his long-running research (["Why Are There Still So Many Jobs"](https://www.aeaweb.org/articles?id=10.1257/jep.29.3.3)) notes that automation, while substituting labor, also complements labor, raises output, and creates new jobs; he even [argues](https://voxdev.org/topic/technology-innovation/david-autor-ai-and-future-work) that if AI can amplify ordinary people's professional judgment, there's a chance to rebuild the middle class. The pessimistic side is the [substitution effect](https://www.brookings.edu/articles/is-automation-labor-displacing-productivity-growth-employment-and-the-labor-share/) emphasized by Acemoglu and Restrepo: if new jobs are created more slowly than old tasks are substituted, labor's share of output falls.
+
+## What does the data actually say
+
+In the short term, the overall programmer pie hasn't collapsed, but its structure is shifting. BLS projects software developer jobs to grow 15% from 2024 to 2034, but simultaneously projects the more execution-oriented "computer programmer" role to fall from 139k to 126k. ADP data shows the developer median wage rose [24%](https://www.adpresearch.com/research/the-rise-and-fall-of-the-software-developer) from 2018 to 2024, lagging the 30% national figure. Still rising, but starting to underperform the broad market.
+
+The hardest hit is the entry point. Tech added a net 267k IT jobs in 2022, then a [net loss of 48.6k](https://intuitionlabs.ai/articles/ai-impact-graduate-jobs-2025) in 2023 and another 22.3k loss in 2024, much of it junior roles. Anthropic's CEO publicly predicted AI could wipe out half of entry-level white-collar jobs.
+
+Watch out for an attribution trap here. A large part of the 2023–2024 tech layoffs were the macro cycle — a correction after pandemic over-expansion, plus rising interest rates; AI was sometimes just a convenient excuse. Pinning everything on AI overstates its current role. But even so, one signal is hard to explain by cycle alone: why did this round of layoffs and freezes hit new grads and junior roles markedly harder than senior ones? This asymmetric shape — hammering the entry, relatively sparing the high end — is exactly what the theory of AI commoditizing the execution layer would predict.
+
+There's also a subtler long-term risk the industry calls the "pipeline problem": if no one hires juniors today, where do the seniors come from in five years? Junior roles were the training ground for growing senior engineers; AI pulls away those training rungs and may, a few years out, create a senior-talent gap. This isn't a pricing problem, it's a problem of reproducing talent.
+
+## So, is a services boom a good thing?
+
+After the detour, back to that new grad mass-applying with his resume, and back to the three original questions.
+
+Programmers earn a lot — is the skill hard? Yes, but the hard part isn't writing code itself, it's judgment and taking responsibility. AI made writing code easier, but it didn't make judgment and responsibility easier — the latter actually became more expensive as the former depreciated. So market pricing won't shift down as a whole, it's splitting open: the execution layer collapses toward zero, the judgment layer rises. For an individual, this means a very concrete judgment: of your income, how much is paid for execution and how much for judgment? The more it's the former, the more dangerous.
+
+Where does the labor squeezed out by commoditization go? Historically, into services. Which raises the final question: is a services boom positive for the economy?
+
+There's an inescapable concept in economics called "Baumol's cost disease." Baumol found that "progressive sectors" like manufacturing and software see fast productivity growth, while "stagnant sectors" like healthcare, education, care work, and on-site services have inherently slow productivity growth — the efficiency of one teacher teaching one class hasn't fundamentally changed in centuries. But because the labor market is connected, stagnant sectors must raise wages too to retain people, so these services get more and more expensive and take up a growing share of the economy. This is why healthcare and education in rich countries keep getting pricier while overall growth [slows](https://www.aeaweb.org/research/rise-services-balanced-growth-us), because more and more economic activity shifts to services where productivity can't grow.
+
+Sounds like a bad thing. But there's another reading. Economist Andrew Sissons argues the Baumol effect is less a disease than a [cure](https://acjsissons.medium.com/the-baumol-effect-not-a-disease-but-a-cure-c63d0ae0b481): it's a machine that distributes the growth gains of high-productivity sectors to all of society through wage linkage. Whether a services boom is positive really depends on whether those services are "value-creating" or "zero-sum consumption." An economy that frees people from repetitive labor into care, education, creativity, face-to-face service is a healthy structural upgrade; but if the freed labor floods into low-quality, substitutable, purely-competitive service jobs that undercut each other's prices, its contribution to total welfare is limited, and may even worsen inequality — because the high-quality services that rise in price become unaffordable to ordinary people.
+
+So "does a services boom have a positive effect on the economy" has no single answer. It depends on one thing: after AI frees people from code, do they go do things machines can't do and that someone truly wants to pay for, or do they merely become one more supplier in an already-crowded low-end service market? The former is Sissons' cure, the latter is Baumol's disease.
+
+Back to that new grad. What he should really ask is not "does programming still have a future," but "what do I intend to price myself on selling." If the answer is "I can translate requirements into code faster than others," then AI is already driving that answer's price into the floor. If the answer is "I can figure out what should be built, and take responsibility for what gets built," then he faces not a shrinking market but one that has just zeroed out the cost of execution and is waiting for someone to do the judgment.
+
+Code will keep getting cheaper. What stays expensive is the person who decides what the code should be — and is willing to sign off on the consequences.
