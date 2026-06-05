@@ -42,6 +42,34 @@
     "lang": "both"
   },
   {
+    "slug": "programmer-salary-not-in-code",
+    "title": "A Programmer's High Salary Was Never in the Code",
+    "title_zh": "程序员的高薪，从来不在代码里",
+    "date": "2026-06-02",
+    "category": "AI",
+    "tags": ["AI", "career", "economics", "software"],
+    "column": "ai",
+    "excerpt": "AI commoditizes the execution layer, not the judgment layer. Why programmer pay is splitting in two — and what to price yourself on.",
+    "excerpt_zh": "AI 商品化的是执行层，不是判断层。为什么程序员的定价正在裂成两半——以及你该靠卖什么定价。",
+    "file": "programmer-salary-not-in-code.en.md",
+    "file_zh": "programmer-salary-not-in-code.zh.md",
+    "lang": "both"
+  },
+  {
+    "slug": "programmer-salary-good-taste",
+    "title": "A Programmer's High Salary Was Never in the Code (2): What Is Good Taste",
+    "title_zh": "程序员的高薪，从来不在代码里（2）：什么是 good taste",
+    "date": "2026-06-01",
+    "category": "AI",
+    "tags": ["AI", "software", "good taste", "engineering"],
+    "column": "ai",
+    "excerpt": "From Linus's deleted if-statement to Chesterton's fence: good taste isn't adding or subtracting — it's making future change easier.",
+    "excerpt_zh": "从 Linus 删掉的那个 if 到契斯特顿的栅栏：good taste 不是加也不是减，而是让未来的改动变容易。",
+    "file": "programmer-salary-good-taste.en.md",
+    "file_zh": "programmer-salary-good-taste.zh.md",
+    "lang": "both"
+  },
+  {
     "slug": "distill-writing-skill",
     "title": "How I Distilled a Writing Skill from yage.ai",
     "title_zh": "我从 yage.ai 的文章里「蒸馏」出了一个写作 skill",
